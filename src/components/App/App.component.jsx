@@ -7,8 +7,8 @@ import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import SecretPage from '../../pages/Secret';
 import Private from '../Private';
-import Fortune from '../Fortune';
 import Layout from '../Layout';
+import VideoPage from '../../pages/VideoPage';
 import { random } from '../../utils/fns';
 
 function App() {
@@ -44,11 +44,13 @@ function App() {
             <Private exact path="/secret">
               <SecretPage />
             </Private>
+            <Route exact path="/video/:videoId">
+              <VideoPage />
+            </Route>
             <Route path="*">
               <NotFound />
             </Route>
           </Switch>
-          <Fortune />
         </Layout>
       </AuthProvider>
     </BrowserRouter>
