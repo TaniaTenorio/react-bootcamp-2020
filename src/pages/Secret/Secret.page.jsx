@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Secret.styles.css';
 import { useHistory } from 'react-router';
+import { DataContext } from '../../providers/Data';
 import Card from '../../components/Card';
 
-import { videoData } from '../../utils/dataMock';
+// import { videoData } from '../../utils/dataMock';
 
 function SecretPage() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const [searchData, setSearchData] = useState([]);
+  const data = useContext(DataContext);
 
   const history = useHistory();
 
@@ -26,9 +28,12 @@ function SecretPage() {
   // }, []);
 
   useEffect(() => {
-    setSearchData(videoData);
+    setLoading(true);
+    if (data) {
+      setSearchData(data);
+    }
     setLoading(false);
-  }, []);
+  }, [data]);
 
   const fetchData = (e) => {
     e.preventDefault();
@@ -59,7 +64,7 @@ function SecretPage() {
       <section className="main-container">
         <section className="cards-container">
           {!loading &&
-            searchData.items.map((item) => {
+            searchData.map((item) => {
               return (
                 <Card
                   key={item.etag}

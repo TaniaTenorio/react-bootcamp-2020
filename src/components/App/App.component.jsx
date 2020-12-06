@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import AuthProvider from '../../providers/Auth';
+import DataProvider from '../../providers/Data';
 import HomePage from '../../pages/Home';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
@@ -41,12 +42,14 @@ function App() {
             <Route exact path="/login">
               <LoginPage />
             </Route>
-            <Private exact path="/secret">
-              <SecretPage />
-            </Private>
-            <Route exact path="/video/:videoId">
-              <VideoPage />
-            </Route>
+            <DataProvider>
+              <Private exact path="/secret">
+                <SecretPage />
+              </Private>
+              <Route exact path="/video/:videoId">
+                <VideoPage />
+              </Route>
+            </DataProvider>
             <Route path="*">
               <NotFound />
             </Route>

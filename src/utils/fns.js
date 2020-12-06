@@ -12,7 +12,7 @@ async function loginApi(username, password) {
         return resolve(mockedUser);
       }
       return reject(new Error('Username or password invalid'));
-    }, 500);
+    }, 100);
   });
 }
 
