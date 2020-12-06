@@ -26,9 +26,14 @@ function AuthProvider({ children }) {
 
   const login = useCallback((username, password) => {
     loginApi(username, password)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    setAuthenticated(true);
+      .then((res) => {
+        console.log(res);
+        setAuthenticated(true);
+        storage.set(AUTH_STORAGE_KEY, true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     storage.set(AUTH_STORAGE_KEY, true);
   }, []);
 

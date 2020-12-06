@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-// import { useAuth } from '../../providers/Auth';
+import { useAuth } from '../../providers/Auth';
 import './Login.styles.css';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const { login } = useAuth();
+  const { login } = useAuth();
   const history = useHistory();
 
   function authenticate(event) {
     event.preventDefault();
-    // login(username, password);
+    login(username, password);
     history.push('/secret');
   }
 
   return (
     <section className="login">
       <h1>Welcome back!</h1>
-      <form onSubmit={authenticate} className="login-form">
+      <form onSubmit={authenticate} className="login-form" data-testid="form">
         <div className="form-group">
           <label htmlFor="username">
             <strong>username </strong>
             <input
               required
+              name="username"
               type="text"
               id="username"
               value={username}
@@ -35,9 +36,10 @@ function LoginPage() {
         </div>
         <div className="form-group">
           <label htmlFor="password">
-            <strong>password </strong>
+            <strong>password</strong>
             <input
               required
+              name="password"
               type="password"
               id="password"
               value={password}
@@ -45,7 +47,9 @@ function LoginPage() {
             />
           </label>
         </div>
-        <button type="submit">login</button>
+        <button type="submit" name="login">
+          login
+        </button>
       </form>
     </section>
   );
