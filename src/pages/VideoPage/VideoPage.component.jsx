@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../../providers/Data';
+import './VideoPage.styles.css';
 // import { videoData } from '../../utils/dataMock';
 
 function VideoPage() {
@@ -23,7 +24,7 @@ function VideoPage() {
   console.log(videoData);
 
   return (
-    <section>
+    <section className="video-view">
       <p>Video Page Here</p>
       {!loading && (
         <iframe
