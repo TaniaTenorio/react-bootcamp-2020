@@ -2,13 +2,14 @@ import React, { useLayoutEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import AuthProvider from '../../providers/Auth';
+import DataProvider from '../../providers/Data';
 import HomePage from '../../pages/Home';
 import LoginPage from '../../pages/Login';
 import NotFound from '../../pages/NotFound';
 import SecretPage from '../../pages/Secret';
 import Private from '../Private';
-import Fortune from '../Fortune';
 import Layout from '../Layout';
+import VideoPage from '../../pages/VideoPage';
 import { random } from '../../utils/fns';
 
 function App() {
@@ -41,14 +42,18 @@ function App() {
             <Route exact path="/login">
               <LoginPage />
             </Route>
-            <Private exact path="/secret">
-              <SecretPage />
-            </Private>
+            <DataProvider>
+              <Private exact path="/secret">
+                <SecretPage />
+              </Private>
+              <Route exact path="/video/:videoId">
+                <VideoPage />
+              </Route>
+            </DataProvider>
             <Route path="*">
               <NotFound />
             </Route>
           </Switch>
-          <Fortune />
         </Layout>
       </AuthProvider>
     </BrowserRouter>
